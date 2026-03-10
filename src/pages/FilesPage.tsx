@@ -244,12 +244,14 @@ export function FilesPage() {
   return (
     <>
       {/* ── Page Header ──────────────────────────────────────────────── */}
-      <div className="hero-header">
-        <div className="hero-breadcrumb">Files · Box Integration</div>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-title">FILES</div>
-          <div className="hero-subtitle">
-            Campaign assets · <span className="accent">Samsung Galaxy S26 Ultra</span>
+      <div className="px-6 pt-6">
+        <div className="hero-header">
+          <div className="hero-breadcrumb">Files · Box Integration</div>
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero-title">FILES</div>
+            <div className="hero-subtitle">
+              Campaign assets · <span className="accent">Samsung Galaxy S26 Ultra</span>
+            </div>
           </div>
         </div>
       </div>

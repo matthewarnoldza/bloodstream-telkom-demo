@@ -93,12 +93,14 @@ export function QAGatesPage() {
     <div className="space-y-6">
 
       {/* Page Header */}
-      <div className="hero-header">
-        <div className="hero-breadcrumb">Quality Control · QA Gates</div>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-title">QA GATES</div>
-          <div className="hero-subtitle">
-            5-gate quality pipeline · <span className="accent">91% overall pass rate</span>
+      <div className="px-6 pt-6">
+        <div className="hero-header">
+          <div className="hero-breadcrumb">Quality Control · QA Gates</div>
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero-title">QA GATES</div>
+            <div className="hero-subtitle">
+              5-gate quality pipeline · <span className="accent">91% overall pass rate</span>
+            </div>
           </div>
         </div>
       </div>

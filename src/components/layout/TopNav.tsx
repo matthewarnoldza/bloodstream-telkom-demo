@@ -16,17 +16,28 @@ export function TopNav() {
     <header className="bg-white border-b border-tk-border shadow-tk-sm sticky top-0 z-50">
       <div className="flex items-center gap-4 px-6 py-3">
 
-        {/* Brand — VML + Bloodstream (matching original) */}
+        {/* Brand — black VML logo + gradient Bloodstream wordmark */}
         <div className="flex items-center gap-3 shrink-0">
-          {/* VML wordmark text mark */}
-          <span className="text-[#0099FF] font-bold text-xl leading-none tracking-tight">VML</span>
+          <img
+            src="/vml-logo-black.png"
+            alt="VML"
+            className="h-7 w-auto object-contain"
+          />
           <div className="h-6 w-px bg-gray-300" />
-          <span className="font-bold text-[22px] text-gray-900 tracking-tight leading-none font-telkom">
+          <span
+            className="font-bold text-[22px] tracking-tight leading-none font-telkom"
+            style={{
+              background: 'linear-gradient(135deg, #0099FF 0%, #00C8FF 40%, #91E200 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
             Bloodstream
           </span>
         </div>
 
-        {/* Nav items — matching original Bloodstream bold pill buttons */}
+        {/* Nav items — Bloodstream-style bold pill buttons */}
         <nav className="flex items-center gap-1 ml-6 flex-1 overflow-x-auto">
           {navItems.map(({ to, label }) => (
             <NavLink
@@ -45,7 +56,7 @@ export function TopNav() {
           ))}
         </nav>
 
-        {/* Right side — Settings + Telkom badge */}
+        {/* Right side — Settings + Telkom logo */}
         <div className="flex items-center gap-3 shrink-0">
           <NavLink
             to="/settings"
@@ -57,16 +68,12 @@ export function TopNav() {
             <Settings size={16} />
           </NavLink>
 
-          {/* Telkom logo badge */}
-          <div className="flex items-center gap-2 bg-tk-grey-lt border border-tk-border rounded-lg px-3 py-1.5">
-            <img
-              src="/telkom-logo.svg"
-              alt="Telkom"
-              className="h-4 w-auto"
-              style={{ filter: 'brightness(0) saturate(100%) invert(29%) sepia(91%) saturate(1234%) hue-rotate(183deg) brightness(97%) contrast(107%)' }}
-            />
-            <span className="text-[10px] font-semibold text-tk-grey uppercase tracking-wider">Demo</span>
-          </div>
+          {/* Telkom logo — larger, no "Demo" text */}
+          <img
+            src="/telkom-logo.svg"
+            alt="Telkom"
+            className="h-8 w-auto object-contain"
+          />
         </div>
       </div>
     </header>

@@ -212,12 +212,14 @@ export function BriefDetailPage() {
   return (
     <div className="flex flex-col gap-0 animate-fade-in">
 
-      <div className="hero-header">
-        <div className="hero-breadcrumb">Brief Intake · TLK-2026-0042</div>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <div className="hero-title">BRIEF INTAKE</div>
-          <div className="hero-subtitle">
-            Samsung Galaxy S26 Ultra Launch · <span className="accent">Platinum Tier</span>
+      <div className="px-6 pt-6">
+        <div className="hero-header">
+          <div className="hero-breadcrumb">Brief Intake · TLK-2026-0042</div>
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <div className="hero-title">BRIEF INTAKE</div>
+            <div className="hero-subtitle">
+              Samsung Galaxy S26 Ultra Launch · <span className="accent">Platinum Tier</span>
+            </div>
           </div>
         </div>
       </div>

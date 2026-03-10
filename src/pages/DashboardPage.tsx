@@ -27,25 +27,35 @@ export function DashboardPage() {
   return (
     <div className="flex flex-col animate-fade-in">
 
-      {/* ── HERO HEADER (theme-1 style) ─────────────────────────────────── */}
-      <div className="hero-header">
-        <div className="hero-breadcrumb">Bloodstream · Telkom</div>
-        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <div>
-            <div className="hero-title">BLOODSTREAM</div>
-            <div className="hero-subtitle">
-              Campaign Intelligence Dashboard · <span className="accent">Possible Begins Here</span>
+      {/* ── HERO HEADER (contained, theme-1 style) ──────────────────────── */}
+      <div className="px-6 pt-6">
+        <div className="hero-header">
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{
+                fontSize: 'clamp(22px, 3vw, 32px)',
+                fontWeight: 800,
+                letterSpacing: '-0.5px',
+                lineHeight: 1.1,
+                color: '#ffffff',
+                marginBottom: 8,
+              }}>
+                Campaign Intelligence Dashboard
+              </div>
+              <div className="hero-subtitle">
+                <span className="accent">Possible Begins Here</span> · Telkom Campaign Intelligence
+              </div>
             </div>
-          </div>
-          {/* Telkom badge */}
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 10,
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: 8, padding: '8px 16px',
-          }}>
-            <img src="/telkom-logo.svg" alt="Telkom" style={{ height: 20, filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 10 }}>10 Mar 2026</span>
+            {/* Date badge */}
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 8, padding: '8px 16px', flexShrink: 0,
+            }}>
+              <img src="/telkom-logo.svg" alt="Telkom" style={{ height: 20, filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 10 }}>10 Mar 2026</span>
+            </div>
           </div>
         </div>
       </div>
