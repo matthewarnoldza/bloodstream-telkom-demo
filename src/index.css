@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Telkom123';
+  src: url('/fonts/Telkom123-LightTelkom123-Light-Regular-normal.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Telkom123';
+  src: url('/fonts/Telkom123-RegularTelkom123-Regular--italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Telkom123';
+  src: url('/fonts/Telkom123-RegularTelkom123-Regular-Bold-normal.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Telkom123';
+  src: url('/fonts/Telkom123-RegularTelkom123-Regular-Bold-italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-tk-grey-lt text-tk-grey antialiased;
+    font-family: 'Telkom123', Inter, system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl border border-tk-border shadow-tk-sm;
+  }
+  .card-green {
+    @apply card border-l-4 border-l-tk-green;
+  }
+  .card-blue {
+    @apply card border-l-4 border-l-tk-blue2;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-tk-blue2 text-white rounded-lg text-sm font-semibold hover:bg-tk-blue transition-colors;
+  }
+  .btn-green {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-tk-green text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-4 py-2 border border-tk-blue2 text-tk-blue2 rounded-lg text-sm font-semibold hover:bg-tk-blue2 hover:text-white transition-colors;
+  }
+  .section-title {
+    @apply text-xl font-bold text-tk-blue font-telkom;
+  }
+  .page-title {
+    @apply text-2xl font-bold text-tk-blue font-telkom;
+  }
+  .label {
+    @apply text-xs font-semibold uppercase tracking-wider text-tk-grey/70;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+}

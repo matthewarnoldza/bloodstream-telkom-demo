@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+.DS_Store
+*.local
+# Large brand source files (assets copied to public/)
+Telkom Brand/
+"Bloodstream Telkom Demo*"
