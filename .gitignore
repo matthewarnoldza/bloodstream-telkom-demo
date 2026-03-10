@@ -6,4 +6,4 @@ dist
 *.local
 # Large brand source files (assets copied to public/)
 Telkom Brand/
-"Bloodstream Telkom Demo*"
+*.docx
