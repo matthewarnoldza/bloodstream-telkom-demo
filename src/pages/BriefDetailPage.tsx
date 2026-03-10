@@ -4,7 +4,6 @@ import {
   CheckCircle2,
   RotateCcw,
   Sparkles,
-  ChevronRight,
   Calendar,
   User,
   DollarSign,
@@ -213,11 +212,14 @@ export function BriefDetailPage() {
   return (
     <div className="flex flex-col gap-0 animate-fade-in">
 
-      {/* ── TOP BAR (breadcrumb) ─────────────────────────────────────────── */}
-      <div className="bg-white border-b border-tk-border px-6 py-3 flex items-center gap-2 text-sm">
-        <span className="text-tk-grey/50 font-medium">Brief Intake</span>
-        <ChevronRight size={14} className="text-tk-grey/30" />
-        <span className="font-semibold text-tk-blue">{briefDetail.id}</span>
+      <div className="hero-header">
+        <div className="hero-breadcrumb">Brief Intake · TLK-2026-0042</div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero-title">BRIEF INTAKE</div>
+          <div className="hero-subtitle">
+            Samsung Galaxy S26 Ultra Launch · <span className="accent">Platinum Tier</span>
+          </div>
+        </div>
       </div>
 
       <div className="p-6 flex flex-col gap-6">

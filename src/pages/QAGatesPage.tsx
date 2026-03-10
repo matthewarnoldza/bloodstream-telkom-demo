@@ -93,11 +93,14 @@ export function QAGatesPage() {
     <div className="space-y-6">
 
       {/* Page Header */}
-      <div className="bg-white border border-tk-border rounded-xl px-6 py-4">
-        <h1 className="page-title">QA Gates</h1>
-        <p className="text-sm text-tk-grey/70 mt-0.5">
-          Campaign quality control pipeline — 5 gate process
-        </p>
+      <div className="hero-header">
+        <div className="hero-breadcrumb">Quality Control · QA Gates</div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero-title">QA GATES</div>
+          <div className="hero-subtitle">
+            5-gate quality pipeline · <span className="accent">91% overall pass rate</span>
+          </div>
+        </div>
       </div>
 
       {/* 5-Gate Visual Pipeline */}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AlertTriangle, Users, Calendar } from 'lucide-react'
+import { AlertTriangle } from 'lucide-react'
 import { teamMembers, TeamMember } from '../data/mockData'
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -54,21 +54,12 @@ export function ResourcePlannerPage() {
   return (
     <div className="p-6 space-y-6 max-w-screen-xl mx-auto">
       {/* ── Page Header ──────────────────────────────────────────────── */}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
-        <div>
-          <h1 className="page-title mb-1">Resource Planner</h1>
-          <p className="text-sm text-tk-grey/70 flex items-center gap-2">
-            <Calendar size={14} />
-            Team capacity overview — Week 10–13 of 2026
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-tk-grey/60">
-            <Users size={14} />
-            <span>{filtered.length} team members</span>
-          </div>
-          <div className={`px-3 py-1 rounded-full text-sm font-bold border ${overallAvg > 100 ? 'bg-red-100 text-red-700 border-red-200' : overallAvg > 80 ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-green-100 text-green-800 border-green-200'}`}>
-            Avg {overallAvg}% utilisation
+      <div className="hero-header">
+        <div className="hero-breadcrumb">Planning · Resource Planner</div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero-title">RESOURCES</div>
+          <div className="hero-subtitle">
+            11-member team · <span className="accent">Weeks 10–13, March 2026</span>
           </div>
         </div>
       </div>

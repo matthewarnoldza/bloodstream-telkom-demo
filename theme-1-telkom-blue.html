@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloodstream — Telkom Campaign Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   THEME 1: TELKOM BLUE
+   Clean, corporate, trustworthy.
+   Deep navy sidebar, bright blue accents,
+   lime green status indicators.
+   Inspired by Telkom's primary brand blue #0099FF
+   =========================================== */
+:root {
+    --bg-main: #F3F5F8;
+    --bg-sidebar: #0B1A2E;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FAFBFD;
+    --text-primary: #0B1A2E;
+    --text-secondary: #5F7089;
+    --text-sidebar: #8FA4C0;
+    --text-sidebar-active: #FFFFFF;
+    --accent-blue: #0099FF;
+    --accent-green: #91E200;
+    --accent-green-bg: rgba(145, 226, 0, 0.12);
+    --accent-blue-bg: rgba(0, 153, 255, 0.08);
+    --border: #E2E8F0;
+    --border-light: #EDF2F7;
+    --shadow-sm: 0 1px 3px rgba(11,26,46,0.06);
+    --shadow-md: 0 4px 12px rgba(11,26,46,0.08);
+    --shadow-lg: 0 8px 30px rgba(11,26,46,0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --sidebar-width: 240px;
+    --font: 'Inter', -apple-system, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow:hidden; }
+body { font-family: var(--font); background: var(--bg-main); color: var(--text-primary); display:flex; }
+
+/* --- Sidebar --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-sidebar);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+.sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,153,255,0.3) 0%, rgba(0,153,255,0) 100%);
+}
+.sidebar-brand {
+    padding: 0 24px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 20px;
+}
+.sidebar-brand .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+.sidebar-brand .logo-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+}
+.sidebar-brand .logo-text span { color: var(--accent-blue); }
+.sidebar-brand .logo-sub {
+    font-size: 10px;
+    color: var(--text-sidebar);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+.nav-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(143,164,192,0.5);
+    padding: 0 24px;
+    margin-bottom: 8px;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    color: var(--text-sidebar);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+.nav-item:hover { color: #C8D6E8; background: rgba(255,255,255,0.03); }
+.nav-item.active {
+    color: var(--text-sidebar-active);
+    background: rgba(0,153,255,0.12);
+}
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: var(--accent-blue);
+    border-radius: 0 4px 4px 0;
+}
+.nav-icon {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.7;
+}
+.nav-item.active .nav-icon { opacity: 1; }
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-footer span {
+    font-size: 11px;
+    color: rgba(143,164,192,0.4);
+}
+
+/* --- Main Content --- */
+.main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* --- Hero Header --- */
+.hero-header {
+    background: var(--bg-sidebar);
+    padding: 32px 36px 28px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+        radial-gradient(ellipse at 10% 50%, rgba(0,153,255,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 50%, rgba(145,226,0,0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+.hero-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+}
+.hero-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 16px;
+}
+.hero-telkom-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    padding: 8px 16px;
+    backdrop-filter: blur(8px);
+}
+.hero-telkom-badge svg { width: 80px; }
+.hero-telkom-badge .date {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 10px;
+}
+.hero-breadcrumb {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+}
+.hero-title {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #0099FF 0%, #00C8FF 40%, #91E200 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+}
+.hero-subtitle {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+.hero-subtitle .accent { color: var(--accent-green); font-weight: 600; }
+
+/* --- Content area below hero --- */
+.content-area {
+    padding: 24px 36px 32px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.page-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+}
+.page-title .highlight { color: var(--accent-blue); }
+.page-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* --- KPI Cards Row --- */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+}
+.kpi-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+}
+.kpi-card:nth-child(1)::before { background: var(--accent-blue); }
+.kpi-card:nth-child(2)::before { background: #6366F1; }
+.kpi-card:nth-child(3)::before { background: var(--accent-green); }
+.kpi-card:nth-child(4)::before { background: #F59E0B; }
+.kpi-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.kpi-value {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+.kpi-card:nth-child(1) .kpi-value { color: var(--accent-blue); }
+.kpi-card:nth-child(2) .kpi-value { color: #6366F1; }
+.kpi-card:nth-child(3) .kpi-value { color: #16A34A; }
+.kpi-card:nth-child(4) .kpi-value { color: #F59E0B; }
+.kpi-unit {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+.kpi-change {
+    font-size: 11px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.kpi-change.up { color: #16A34A; }
+.kpi-change.stable { color: var(--text-secondary); }
+
+/* --- Campaign Table --- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+.section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.section-count {
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--accent-blue-bg);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+.table-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+thead th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+    background: #F8FAFC;
+    border-bottom: 1px solid var(--border);
+}
+tbody tr {
+    border-bottom: 1px solid var(--border-light);
+    transition: background 0.15s;
+}
+tbody tr:hover { background: #F8FAFD; }
+tbody tr:last-child { border-bottom: none; }
+td {
+    padding: 12px 16px;
+    font-size: 13px;
+}
+.campaign-id {
+    color: var(--accent-blue);
+    font-weight: 600;
+    font-size: 12px;
+    font-family: 'SF Mono', monospace;
+}
+.campaign-name { font-weight: 600; color: var(--text-primary); }
+.campaign-client { color: var(--text-secondary); }
+.tier-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.tier-platinum { background: #EEF2FF; color: #4F46E5; }
+.tier-gold { background: #FEF3C7; color: #B45309; }
+.tier-silver { background: #F1F5F9; color: #475569; }
+.phase-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+}
+.phase-creative { background: rgba(0,153,255,0.08); color: #0077CC; }
+.phase-distribution { background: rgba(145,226,0,0.12); color: #5A8F00; }
+.phase-briefqa { background: #FEF3C7; color: #92400E; }
+.phase-version { background: #F3E8FF; color: #7C3AED; }
+.phase-rollout { background: #ECFDF5; color: #059669; }
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+}
+.status-on-track .dot { background: var(--accent-green); }
+.status-on-track { color: #16A34A; }
+.status-at-risk .dot { background: #F59E0B; }
+.status-at-risk { color: #D97706; }
+
+/* --- Scrollbar --- */
+.main::-webkit-scrollbar { width: 6px; }
+.main::-webkit-scrollbar-track { background: transparent; }
+.main::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+
+/* --- Animations --- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.kpi-card { animation: fadeUp 0.5s ease-out backwards; }
+.kpi-card:nth-child(1) { animation-delay: 0.05s; }
+.kpi-card:nth-child(2) { animation-delay: 0.1s; }
+.kpi-card:nth-child(3) { animation-delay: 0.15s; }
+.kpi-card:nth-child(4) { animation-delay: 0.2s; }
+.table-card { animation: fadeUp 0.5s ease-out 0.3s backwards; }
+
+/* Hero animations */
+.hero-header { animation: fadeUp 0.4s ease-out; }
+.hero-title {
+    animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+}
+@keyframes heroReveal {
+    from { opacity: 0; transform: translateY(24px) scale(0.96); letter-spacing: 4px; }
+    to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: -2px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+        <div class="logo-row">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#0099FF" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="#0099FF" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="logo-text">Blood<span>stream</span></span>
+        </div>
+        <div class="logo-sub">Campaign Intelligence</div>
+    </div>
+
+    <div class="nav-label">Navigation</div>
+    <div class="nav-item active">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M2 7h12M7 2v12"/></svg></span>
+        Dashboard
+    </div>
+    <div class="nav-item">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 2v12h12"/><path d="M4 10l4-4 3 3 5-5"/></svg></span>
+        Brief Intake
+    </div>
+    <div class="nav-item">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l3 3"/></svg></span>
+        Circulation
+    </div>
+    <div class="nav-item">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h8"/></svg></span>
+        QA Gates
+    </div>
+    <div class="nav-item">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 14V8l5-6 5 6v6"/><path d="M6 14v-4h4v4"/></svg></span>
+        Version History
+    </div>
+    <div class="nav-item">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="12" height="10" rx="1"/><path d="M6 4V2h4v2"/></svg></span>
+        Resources
+    </div>
+    <div class="nav-item">
+        <span class="nav-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h4v4H3zM9 3h4v4H9zM3 9h4v4H3zM9 9h4v4H9z"/></svg></span>
+        Files
+    </div>
+
+    <div class="sidebar-footer">
+        <span>Powered by VML</span>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main">
+
+    <!-- Hero Header -->
+    <div class="hero-header">
+        <div class="hero-top-row">
+            <div class="hero-breadcrumb">Bloodstream · Telkom</div>
+            <div class="hero-telkom-badge">
+                <svg viewBox="0 0 2120 518" fill="none"><path d="M250 507V12.5H4.54C1.56 28.71 0 45.42 0 62.5s1.56 33.79 4.54 50h135.46v394.5c17.77 3.61 36.16 5.5 55 5.5s37.23-1.9 55-5.5" fill="#09f"/><path d="M395.46 12.5H290v100h105.46c2.98-16.21 4.54-32.92 4.54-50s-1.56-33.79-4.54-50" fill="#91e200"/><path d="M536.73 286.76c-2.81-39.42-24.73-62.77-59.35-62.77-39.89 0-62.26 20.55-68.26 62.77h127.61z" fill="#09f"/><path d="M687.86 5.5v447c0 33.14 26.86 60 59.99 60h0c17.19 0 33.92-1.93 50-5.58V5.5c-17.77-3.6-36.16-5.5-55-5.5s-37.23 1.9-55 5.5" fill="#09f"/><path d="M965.85 507V5.5C948.08 1.9 929.69 0 910.85 0s-37.23 1.9-55 5.5v501.49c17.77 3.61 36.16 5.5 55 5.5s37.23-1.89 55-5.5" fill="#09f"/><path d="M1095.38 317.32l93.22-165.68c-18.24-2.73-36.9-4.14-55.9-4.14-20.71 0-41.03 1.68-60.83 4.91l-89.58 169.32 104.4 185.77c19.98 3.29 40.5 5 61.41 5 19.1 0 37.87-1.43 56.21-4.19l-108.93-190.99z" fill="#09f"/><path d="M1372.43 223.99c-33.27 0-60.34 26.59-60.34 59.28v92.85c0 33.03 27.07 59.9 60.34 59.9s60.96-26.31 60.96-59.9v-92.85c0-32.69-27.35-59.28-60.96-59.28" fill="#09f"/><path d="M2120 507.2v-224.36c0-95.75-38.87-140.34-122.32-140.34-43.16 0-78.15 19.37-101.73 56.16-17.5-37.27-53.25-56.16-106.41-56.16-39.3 0-72.81 16.88-95.65 47.86-1.61-9.36-4.71-24.17-7.38-32.27" fill="#09f"/></svg>
+                <span class="date">10 Mar 2026</span>
+            </div>
+        </div>
+        <div class="hero-title">BLOODSTREAM</div>
+        <div class="hero-subtitle">Campaign Intelligence Dashboard · <span class="accent">Possible Begins Here</span></div>
+    </div>
+
+    <div class="content-area">
+
+    <!-- Sub header -->
+    <div class="top-bar">
+        <div>
+            <div class="page-title"><span class="highlight">Campaign Intelligence</span> Dashboard</div>
+            <div class="page-subtitle">Tuesday, 10 March 2026</div>
+        </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-label">Active Campaigns</div>
+            <div class="kpi-value">10</div>
+            <div class="kpi-change up">↑ vs 8 last quarter</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Avg Velocity</div>
+            <div class="kpi-value">14.2 <span class="kpi-unit">days</span></div>
+            <div class="kpi-change up">↑ improved from 17.2</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">BG Pass Rate</div>
+            <div class="kpi-value">91<span class="kpi-unit">%</span></div>
+            <div class="kpi-change up">↑ 3pts this quarter</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">On-Time Delivery</div>
+            <div class="kpi-value">88<span class="kpi-unit">%</span></div>
+            <div class="kpi-change stable">— stable</div>
+        </div>
+    </div>
+
+    <!-- Campaign Table -->
+    <div class="section-header">
+        <div class="section-title">Active Campaigns</div>
+        <div class="section-count">10 campaigns</div>
+    </div>
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Campaign</th>
+                    <th>Client</th>
+                    <th>Tier</th>
+                    <th>Phase</th>
+                    <th>Status</th>
+                    <th>Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="campaign-id">TLK-2026-0042</td>
+                    <td class="campaign-name">Samsung Galaxy S26 Ultra Launch</td>
+                    <td class="campaign-client">Samsung</td>
+                    <td><span class="tier-badge tier-platinum">Platinum</span></td>
+                    <td><span class="phase-badge phase-creative">Creative</span></td>
+                    <td><span class="status-badge status-on-track"><span class="dot"></span>On Track</span></td>
+                    <td>3d</td>
+                </tr>
+                <tr>
+                    <td class="campaign-id">TLK-2026-0039</td>
+                    <td class="campaign-name">Telkom Business Fibre Q1</td>
+                    <td class="campaign-client">Telkom Business</td>
+                    <td><span class="tier-badge tier-platinum">Platinum</span></td>
+                    <td><span class="phase-badge phase-distribution">Distribution</span></td>
+                    <td><span class="status-badge status-on-track"><span class="dot"></span>On Track</span></td>
+                    <td>5d</td>
+                </tr>
+                <tr>
+                    <td class="campaign-id">TLK-2026-0038</td>
+                    <td class="campaign-name">LTE Home Connect Summer</td>
+                    <td class="campaign-client">Telkom Consumer</td>
+                    <td><span class="tier-badge tier-gold">Gold</span></td>
+                    <td><span class="phase-badge phase-briefqa">Brief QA</span></td>
+                    <td><span class="status-badge status-on-track"><span class="dot"></span>On Track</span></td>
+                    <td>1d</td>
+                </tr>
+                <tr>
+                    <td class="campaign-id">TLK-2026-0036</td>
+                    <td class="campaign-name">March Monthly Broadsheet</td>
+                    <td class="campaign-client">Telkom Consumer</td>
+                    <td><span class="tier-badge tier-gold">Gold</span></td>
+                    <td><span class="phase-badge phase-version">Version Control</span></td>
+                    <td><span class="status-badge status-at-risk"><span class="dot"></span>At Risk</span></td>
+                    <td>8d</td>
+                </tr>
+                <tr>
+                    <td class="campaign-id">TLK-2026-0035</td>
+                    <td class="campaign-name">FreeMe Unlimited Relaunch</td>
+                    <td class="campaign-client">Telkom Mobile</td>
+                    <td><span class="tier-badge tier-platinum">Platinum</span></td>
+                    <td><span class="phase-badge phase-rollout">Rollout</span></td>
+                    <td><span class="status-badge status-on-track"><span class="dot"></span>On Track</span></td>
+                    <td>2d</td>
+                </tr>
+                <tr>
+                    <td class="campaign-id">TLK-2026-0034</td>
+                    <td class="campaign-name">SME Starter Pack Campaign</td>
+                    <td class="campaign-client">Telkom Business</td>
+                    <td><span class="tier-badge tier-silver">Silver</span></td>
+                    <td><span class="phase-badge phase-creative">Creative</span></td>
+                    <td><span class="status-badge status-on-track"><span class="dot"></span>On Track</span></td>
+                    <td>4d</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div><!-- /content-area -->
+</main>
+
+</body>
+</html>

@@ -8,7 +8,6 @@ import {
   XAxis, YAxis,
   CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts'
-import { Download } from 'lucide-react'
 import { circulationData } from '../data/mockData'
 
 // ─── Chart Card ────────────────────────────────
@@ -36,19 +35,17 @@ const tickStyle = { fontSize: 10, fill: '#4A4A4A' }
 export function CirculationPage() {
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div className="bg-white border border-tk-border rounded-xl px-6 py-4 flex items-center justify-between">
-        <div>
-          <h1 className="page-title">Circulation Dashboard</h1>
-          <p className="text-sm text-tk-grey/70 mt-0.5">
-            13 performance metrics across the campaign pipeline
-          </p>
-          <p className="text-xs text-tk-grey/50 mt-1">Week 12 of 12 · March 2026</p>
+      <div className="hero-header">
+        <div className="hero-breadcrumb">Analytics · Circulation</div>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <div>
+            <div className="hero-title">CIRCULATION</div>
+            <div className="hero-subtitle">
+              13 performance metrics · <span className="accent">Week 12 of 12</span>
+            </div>
+          </div>
+          <button className="btn-outline" style={{ fontSize: 13, padding: '8px 16px' }}>Export Report</button>
         </div>
-        <button className="btn-outline">
-          <Download size={15} />
-          Export Report
-        </button>
       </div>
 
       {/* Chart Grid */}

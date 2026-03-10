@@ -242,7 +242,19 @@ export function FilesPage() {
   const visibleFiles = selectedFolder === 'Samsung S26 Ultra' ? boxFiles : []
 
   return (
-    <div className="flex h-[calc(100vh-64px)] overflow-hidden">
+    <>
+      {/* ── Page Header ──────────────────────────────────────────────── */}
+      <div className="hero-header">
+        <div className="hero-breadcrumb">Files · Box Integration</div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero-title">FILES</div>
+          <div className="hero-subtitle">
+            Campaign assets · <span className="accent">Samsung Galaxy S26 Ultra</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex h-[calc(100vh-64px)] overflow-hidden">
       {/* ── LEFT: Folder sidebar ─────────────────────────────────────── */}
       <div className="w-56 shrink-0 bg-white border-r border-tk-border flex flex-col">
         <div className="flex items-center gap-2 px-4 py-4 border-b border-tk-border">
@@ -374,5 +386,6 @@ export function FilesPage() {
         )}
       </div>
     </div>
+    </>
   )
 }

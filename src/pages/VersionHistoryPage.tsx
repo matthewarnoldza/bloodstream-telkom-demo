@@ -56,19 +56,12 @@ export function VersionHistoryPage() {
   return (
     <div className="p-6 space-y-6 max-w-screen-xl mx-auto">
       {/* ── Page Header ──────────────────────────────────────────────── */}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
-        <div>
-          <h1 className="page-title mb-1">Version History</h1>
-          <p className="text-sm text-tk-grey/70 flex items-center gap-2">
-            <GitBranch size={14} />
-            March Monthly Broadsheet · TLK-2026-0036
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <StatusBadge label="At Risk" variant="status" size="md" />
-          <div className="flex items-center gap-1.5 text-sm text-tk-grey/60">
-            <Clock size={14} />
-            <span>9 versions · 4 weeks</span>
+      <div className="hero-header">
+        <div className="hero-breadcrumb">Version Control · March Broadsheet</div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero-title">VERSION HISTORY</div>
+          <div className="hero-subtitle">
+            TLK-2026-0036 · <span className="accent">9 versions · 4 weeks</span>
           </div>
         </div>
       </div>

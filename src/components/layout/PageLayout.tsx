@@ -1,4 +1,4 @@
-import { Sidebar } from './Sidebar'
+import { TopNav } from './TopNav'
 
 interface PageLayoutProps {
   children: React.ReactNode
@@ -6,9 +6,9 @@ interface PageLayoutProps {
 
 export function PageLayout({ children }: PageLayoutProps) {
   return (
-    <div className="flex min-h-screen bg-tk-grey-lt">
-      <Sidebar />
-      <main className="flex-1 min-w-0 overflow-y-auto">
+    <div className="min-h-screen bg-tk-grey-lt flex flex-col">
+      <TopNav />
+      <main className="flex-1 min-w-0">
         {children}
       </main>
     </div>
