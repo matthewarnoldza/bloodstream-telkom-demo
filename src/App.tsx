@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { PageLayout } from './components/layout/PageLayout'
+import { BriefIngestPage } from './pages/BriefIngestPage'
 import { DiscoverPage } from './pages/DiscoverPage'
 import { BriefDetailPage } from './pages/BriefDetailPage'
 import { DashboardPage } from './pages/DashboardPage'
@@ -20,8 +21,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/discover"  element={<DiscoverPage />} />
-          <Route path="/define"    element={<BriefDetailPage />} />
+          <Route path="/discover"  element={<BriefIngestPage />} />
+          <Route path="/define"    element={<DiscoverPage />} />
+          <Route path="/define/:id" element={<BriefDetailPage />} />
           <Route path="/develop"   element={<DashboardPage />} />
           <Route path="/deliver"   element={<FilesPage />} />
           <Route path="/diagnose"  element={<DiagnosePage />} />

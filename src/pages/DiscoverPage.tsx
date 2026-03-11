@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Search, ArrowUpCircle, Zap, Archive, Plus, ChevronUp } from 'lucide-react'
 import { discoverBriefs, DiscoverBrief } from '../data/mockData'
 
@@ -34,6 +35,7 @@ function FlowBadge({ flow }: { flow: FlowStatus }) {
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export function DiscoverPage() {
+  const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
   const [filterClient, setFilterClient] = useState<string>('All')
   const [infoOpen, setInfoOpen] = useState(true)
@@ -205,7 +207,10 @@ export function DiscoverPage() {
                     <td className="px-4 py-4 text-sm text-gray-400">–</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <button className="px-4 py-1.5 rounded-full border border-tk-green text-tk-green text-xs font-semibold hover:bg-tk-green hover:text-tk-navy transition-colors">
+                        <button
+                          onClick={() => navigate(`/define/${brief.id}`)}
+                          className="px-4 py-1.5 rounded-full border border-tk-green text-tk-green text-xs font-semibold hover:bg-tk-green hover:text-tk-navy transition-colors"
+                        >
                           View
                         </button>
                         {flow !== 'RESOLVED' && (
