@@ -243,18 +243,7 @@ export function FilesPage() {
 
   return (
     <>
-      {/* ── Page Header ──────────────────────────────────────────────── */}
-      <div className="px-6 pt-6">
-        <div className="hero-header">
-          <div className="hero-breadcrumb">D4 · Deliver</div>
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <div className="hero-title">DELIVER</div>
-            <div className="hero-subtitle">
-              Campaign asset delivery · <span className="accent">Samsung Galaxy S26 Ultra</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Page header removed — clean layout */}
 
       <div className="flex h-[calc(100vh-64px)] overflow-hidden">
       {/* ── LEFT: Folder sidebar ─────────────────────────────────────── */}

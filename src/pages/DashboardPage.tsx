@@ -27,30 +27,7 @@ export function DashboardPage() {
   return (
     <div className="flex flex-col animate-fade-in">
 
-      {/* ── HERO HEADER (contained, theme-1 style) ──────────────────────── */}
-      <div className="px-6 pt-6">
-        <div className="hero-header">
-          <div className="hero-breadcrumb">D3 · Develop</div>
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <div className="hero-title">DEVELOP</div>
-              <div className="hero-subtitle">
-                Campaign development dashboard · <span className="accent">Telkom Campaign Intelligence</span>
-              </div>
-            </div>
-            {/* Date badge */}
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 8, padding: '8px 16px', flexShrink: 0,
-            }}>
-              <img src="/telkom-logo.svg" alt="Telkom" style={{ height: 20, filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 10 }}>10 Mar 2026</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* ── PAGE HEADER ──────────────────────────────────────────────── */}
 
       <div className="p-6 flex flex-col gap-6">
 

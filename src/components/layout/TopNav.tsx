@@ -1,36 +1,59 @@
+import { NavLink } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
+
+const navItems = [
+  { to: '/discover', label: 'DISCOVER' },
+  { to: '/define',   label: 'DEFINE' },
+  { to: '/develop',  label: 'DEVELOP' },
+  { to: '/deliver',  label: 'DELIVER' },
+  { to: '/diagnose', label: 'DIAGNOSE' },
+  { to: '/history',  label: 'HISTORY' },
+]
+
 export function TopNav() {
   return (
-    <header className="bg-white border-b border-tk-border shadow-tk-sm sticky top-0 z-50">
-      <div className="flex items-center justify-between px-6 py-3">
-
-        {/* Brand — black VML logo + gradient Bloodstream wordmark */}
-        <div className="flex items-center gap-3 shrink-0">
-          <img
-            src="/vml-logo-black.png"
-            alt="VML"
-            className="h-7 w-auto object-contain"
-          />
-          <div className="h-6 w-px bg-gray-300" />
-          <span
-            className="font-bold text-[22px] tracking-tight leading-none font-telkom"
-            style={{
-              background: 'linear-gradient(135deg, #0099FF 0%, #00C8FF 40%, #91E200 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Bloodstream
-          </span>
+    <header className="bg-white sticky top-0 z-50">
+      {/* Row 1: Brand bar */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center gap-4">
+          <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-colors">
+            <ArrowLeft size={16} />
+          </button>
+          <div className="h-6 w-px bg-gray-200" />
+          <h1 className="text-2xl font-bold text-tk-navy tracking-tight">
+            TELKOM
+          </h1>
         </div>
-
-        {/* Right side — Telkom logo */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-4">
           <img
             src="/telkom-logo.svg"
             alt="Telkom"
-            className="h-8 w-auto object-contain"
+            className="h-9 w-auto object-contain"
           />
+        </div>
+      </div>
+
+      {/* Row 2: Tab navigation */}
+      <div className="flex items-center justify-between px-6 py-2 border-b border-gray-200">
+        <nav className="flex items-center gap-1">
+          {navItems.map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                isActive
+                  ? 'px-5 py-1.5 rounded-full bg-tk-green text-tk-navy text-sm font-bold tracking-wide transition-all'
+                  : 'px-5 py-1.5 rounded-full text-gray-400 text-sm font-semibold tracking-wide hover:text-gray-600 hover:bg-gray-50 transition-all'
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-400 font-medium">Matthew Arnold</span>
+          <span className="text-xs text-gray-300">Logout</span>
         </div>
       </div>
     </header>

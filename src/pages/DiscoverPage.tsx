@@ -1,30 +1,32 @@
 import { useState } from 'react'
-import { Search, Filter, FileText, Calendar, User } from 'lucide-react'
+import { Search, ArrowUpCircle, Zap, Archive, Plus, ChevronUp } from 'lucide-react'
 import { discoverBriefs, DiscoverBrief } from '../data/mockData'
-import { StatusBadge } from '../components/ui/StatusBadge'
 
-// ─── Brief status badge ──────────────────────────────────────────────────────
+// ─── Flow status mapping ────────────────────────────────────────────────────
 
-function BriefStatusBadge({ status }: { status: DiscoverBrief['status'] }) {
-  const cfg: Record<string, string> = {
-    'New':       'bg-blue-100 text-blue-800',
-    'In Review': 'bg-amber-100 text-amber-800',
-    'Approved':  'bg-green-100 text-green-800',
-    'Returned':  'bg-red-100 text-red-800',
+type FlowStatus = 'INTAKE' | 'PRODUCTION' | 'RESOLVED' | 'RETURNED'
+
+function mapStatusToFlow(status: DiscoverBrief['status']): FlowStatus {
+  switch (status) {
+    case 'New': return 'INTAKE'
+    case 'In Review': return 'PRODUCTION'
+    case 'Approved': return 'RESOLVED'
+    case 'Returned': return 'RETURNED'
   }
-  return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${cfg[status] ?? 'bg-gray-100 text-gray-600'}`}>
-      {status}
-    </span>
-  )
 }
 
-function PriorityDot({ priority }: { priority: DiscoverBrief['priority'] }) {
-  const color = priority === 'High' ? 'bg-red-500' : priority === 'Medium' ? 'bg-amber-400' : 'bg-gray-300'
+function FlowBadge({ flow }: { flow: FlowStatus }) {
+  const cfg: Record<FlowStatus, { bg: string; dot: string; text: string }> = {
+    INTAKE:     { bg: 'bg-blue-50 text-blue-700',   dot: 'bg-blue-500',   text: 'INTAKE' },
+    PRODUCTION: { bg: 'bg-red-50 text-red-600',     dot: 'bg-red-500',    text: 'PRODUCTION' },
+    RESOLVED:   { bg: 'bg-gray-100 text-gray-500',  dot: 'bg-gray-400',   text: 'RESOLVED' },
+    RETURNED:   { bg: 'bg-amber-50 text-amber-700', dot: 'bg-amber-500',  text: 'RETURNED' },
+  }
+  const c = cfg[flow]
   return (
-    <span className="flex items-center gap-1.5 text-xs text-tk-grey/60">
-      <span className={`w-2 h-2 rounded-full ${color}`} />
-      {priority}
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold tracking-wide ${c.bg}`}>
+      <span className={`w-1.5 h-1.5 rounded-full ${c.dot}`} />
+      {c.text}
     </span>
   )
 }
@@ -33,164 +35,193 @@ function PriorityDot({ priority }: { priority: DiscoverBrief['priority'] }) {
 
 export function DiscoverPage() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [filterStatus, setFilterStatus] = useState<string>('All')
-  const [filterTier, setFilterTier] = useState<string>('All')
+  const [filterClient, setFilterClient] = useState<string>('All')
+  const [infoOpen, setInfoOpen] = useState(true)
+
+  const clients = ['All', ...new Set(discoverBriefs.map(b => b.client))]
 
   const filtered = discoverBriefs.filter(b => {
-    if (filterStatus !== 'All' && b.status !== filterStatus) return false
-    if (filterTier !== 'All' && b.tier !== filterTier) return false
-    if (searchTerm && !b.title.toLowerCase().includes(searchTerm.toLowerCase()) && !b.client.toLowerCase().includes(searchTerm.toLowerCase())) return false
+    if (filterClient !== 'All' && b.client !== filterClient) return false
+    if (searchTerm && !b.title.toLowerCase().includes(searchTerm.toLowerCase()) && !b.id.toLowerCase().includes(searchTerm.toLowerCase())) return false
     return true
   })
 
-  const countByStatus = (s: string) => discoverBriefs.filter(b => b.status === s).length
+  const intakeCount = discoverBriefs.filter(b => b.status === 'New').length
+  const inFlowCount = discoverBriefs.filter(b => b.status === 'In Review').length
+  const resolvedCount = discoverBriefs.filter(b => b.status === 'Approved').length
 
   return (
     <div className="flex flex-col animate-fade-in">
+      <div className="p-6 flex flex-col gap-5 max-w-screen-xl mx-auto w-full">
 
-      {/* ── HERO HEADER ──────────────────────────────────────────────── */}
-      <div className="px-6 pt-6">
-        <div className="hero-header">
-          <div className="hero-breadcrumb">D1 · Discover</div>
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        {/* ── KPI SUMMARY ROW ──────────────────────────────────────────── */}
+        <div className="grid grid-cols-4 gap-4">
+          {/* Intake */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center justify-between">
             <div>
-              <div className="hero-title">DISCOVER</div>
-              <div className="hero-subtitle">
-                Incoming campaign briefs · <span className="accent">All Telkom brands</span>
-              </div>
+              <p className="text-sm text-gray-400 font-medium">Intake</p>
+              <p className="text-3xl font-bold text-tk-blue mt-1">{intakeCount}</p>
             </div>
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 10,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: 8, padding: '8px 16px', flexShrink: 0,
-            }}>
-              <img src="/telkom-logo.svg" alt="Telkom" style={{ height: 20, filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 10 }}>11 Mar 2026</span>
+            <ArrowUpCircle size={28} className="text-pink-400 opacity-60" />
+          </div>
+          {/* In Flow */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-400 font-medium">In Flow</p>
+              <p className="text-3xl font-bold text-tk-blue mt-1">{inFlowCount}</p>
             </div>
+            <Zap size={28} className="text-blue-400 opacity-60" />
+          </div>
+          {/* Resolved */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-400 font-medium">Resolved</p>
+              <p className="text-3xl font-bold text-gray-500 mt-1">{resolvedCount}</p>
+            </div>
+            <Archive size={28} className="text-gray-300" />
+          </div>
+          {/* Create New Brief CTA */}
+          <div
+            className="rounded-2xl p-5 flex flex-col items-center justify-center text-center cursor-pointer hover:scale-[1.02] transition-transform"
+            style={{
+              background: 'linear-gradient(135deg, #6366F1 0%, #EC4899 50%, #F97316 100%)',
+            }}
+          >
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-2">
+              <Plus size={20} className="text-white" />
+            </div>
+            <p className="text-white/80 text-xs font-medium">Create New Brief</p>
+            <p className="text-white text-lg font-bold">Inject</p>
           </div>
         </div>
-      </div>
 
-      <div className="p-6 flex flex-col gap-6">
-
-        {/* ── STATS ROW ────────────────────────────────────────────────── */}
-        <div className="flex items-center gap-3 flex-wrap">
-          <span className="text-xs font-semibold text-[#0099FF] bg-[#0099FF]/8 px-3 py-1 rounded-full">
-            {discoverBriefs.length} total briefs
-          </span>
-          <span className="text-xs font-semibold text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-            {countByStatus('New')} new
-          </span>
-          <span className="text-xs font-semibold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">
-            {countByStatus('In Review')} in review
-          </span>
-          <span className="text-xs font-semibold text-green-700 bg-green-100 px-3 py-1 rounded-full">
-            {countByStatus('Approved')} approved
-          </span>
-          <span className="text-xs font-semibold text-red-700 bg-red-100 px-3 py-1 rounded-full">
-            {countByStatus('Returned')} returned
-          </span>
+        {/* ── BRIEF DISCOVERY INFO ─────────────────────────────────────── */}
+        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <button
+            onClick={() => setInfoOpen(!infoOpen)}
+            className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              <Search size={16} className="text-gray-400" />
+              <span className="text-sm font-semibold text-tk-navy">Brief Discovery</span>
+            </div>
+            <ChevronUp size={16} className={`text-gray-400 transition-transform ${infoOpen ? '' : 'rotate-180'}`} />
+          </button>
+          {infoOpen && (
+            <div className="px-6 pb-5 pt-0">
+              <ul className="space-y-1.5 text-sm text-gray-500">
+                <li className="flex items-start gap-2">
+                  <span className="text-tk-blue mt-0.5">•</span>
+                  <span><span className="font-semibold text-gray-700">Browse incoming briefs</span> — view all briefs from clients, use filters to find specific ones</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-tk-blue mt-0.5">•</span>
+                  <span><span className="font-semibold text-gray-700">Accept to begin</span> — click "Accept" on a brief to take ownership and start the enhancement process</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-tk-blue mt-0.5">•</span>
+                  <span><span className="font-semibold text-gray-700">Inject your own</span> — use the "Inject" button above to create a brief manually</span>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
 
-        {/* ── FILTERS ──────────────────────────────────────────────────── */}
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="relative flex-1 min-w-[200px] max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-tk-grey/40" />
+        {/* ── FILTER BAR ───────────────────────────────────────────────── */}
+        <div className="flex items-center gap-4">
+          <select
+            value={filterClient}
+            onChange={e => setFilterClient(e.target.value)}
+            className="text-sm border border-gray-200 rounded-xl px-4 py-2.5 bg-white text-tk-navy font-medium focus:outline-none focus:border-tk-blue2 min-w-[180px]"
+          >
+            {clients.map(c => (
+              <option key={c} value={c}>{c === 'All' ? 'All Clients' : c}</option>
+            ))}
+          </select>
+
+          <div className="relative flex-1">
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-300" />
             <input
               type="text"
-              placeholder="Search briefs…"
+              placeholder="Search by job # or campaign name..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-tk-border rounded-lg bg-white text-tk-grey placeholder-tk-grey/40 focus:outline-none focus:border-tk-blue2"
+              className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl bg-white text-tk-navy placeholder-gray-300 focus:outline-none focus:border-tk-blue2"
             />
           </div>
-          <div className="flex items-center gap-1.5">
-            <Filter size={13} className="text-tk-grey/40" />
-            <select
-              value={filterStatus}
-              onChange={e => setFilterStatus(e.target.value)}
-              className="text-xs border border-tk-border rounded-lg px-2.5 py-2 bg-white text-tk-grey focus:outline-none focus:border-tk-blue2"
-            >
-              <option value="All">All Statuses</option>
-              <option value="New">New</option>
-              <option value="In Review">In Review</option>
-              <option value="Approved">Approved</option>
-              <option value="Returned">Returned</option>
-            </select>
-            <select
-              value={filterTier}
-              onChange={e => setFilterTier(e.target.value)}
-              className="text-xs border border-tk-border rounded-lg px-2.5 py-2 bg-white text-tk-grey focus:outline-none focus:border-tk-blue2"
-            >
-              <option value="All">All Tiers</option>
-              <option value="Platinum">Platinum</option>
-              <option value="Gold">Gold</option>
-              <option value="Silver">Silver</option>
-              <option value="Bronze">Bronze</option>
-            </select>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-sm">
+              <span className="text-tk-blue font-bold">{filtered.length}</span>
+              <span className="text-gray-400"> of {discoverBriefs.length}</span>
+            </span>
+            {(searchTerm || filterClient !== 'All') && (
+              <button
+                onClick={() => { setSearchTerm(''); setFilterClient('All') }}
+                className="text-sm text-gray-400 hover:text-gray-600 font-medium"
+              >
+                Clear
+              </button>
+            )}
           </div>
         </div>
 
-        {/* ── BRIEF CARDS GRID ─────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {filtered.map(brief => (
-            <div
-              key={brief.id}
-              className="card p-5 hover:shadow-tk-md transition-shadow duration-200 cursor-default group"
-            >
-              {/* Top row: ID + badges */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="font-mono text-[11px] text-tk-blue2 font-bold bg-tk-blue2/8 px-2 py-0.5 rounded">
-                  {brief.id}
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <StatusBadge label={brief.tier} variant="tier" size="sm" />
-                  <BriefStatusBadge status={brief.status} />
-                </div>
-              </div>
-
-              {/* Title + client */}
-              <h3 className="font-bold text-tk-blue text-sm leading-tight mb-1 group-hover:text-tk-blue2 transition-colors">
-                {brief.title}
-              </h3>
-              <p className="text-xs text-tk-grey/60 mb-2">{brief.client}</p>
-
-              {/* Description */}
-              <p className="text-xs text-tk-grey/80 leading-relaxed mb-3 line-clamp-2">
-                {brief.description}
-              </p>
-
-              {/* Footer meta */}
-              <div className="flex items-center justify-between gap-2 pt-3 border-t border-tk-border">
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1 text-xs text-tk-grey/60">
-                    <FileText size={11} className="text-tk-blue2" />
-                    {brief.category}
-                  </span>
-                  <PriorityDot priority={brief.priority} />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="flex items-center gap-1 text-[10px] text-tk-grey/50">
-                    <User size={10} />
-                    {brief.submittedBy.split(' ')[0]}
-                  </span>
-                  <span className="flex items-center gap-1 text-[10px] text-tk-grey/50">
-                    <Calendar size={10} />
-                    {new Date(brief.submittedDate).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short' })}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* ── DATA TABLE ───────────────────────────────────────────────── */}
+        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-100">
+                <th className="text-left px-6 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Campaign Name</th>
+                <th className="text-left px-4 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Client</th>
+                <th className="text-left px-4 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Submitted Date</th>
+                <th className="text-left px-4 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Flow</th>
+                <th className="text-left px-4 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Accepted By</th>
+                <th className="text-left px-4 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Reverts</th>
+                <th className="text-right px-6 py-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map(brief => {
+                const flow = mapStatusToFlow(brief.status)
+                return (
+                  <tr key={brief.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div>
+                        <span className="text-tk-blue font-bold text-sm">#{brief.id}</span>
+                        <span className="text-tk-navy font-semibold text-sm ml-2">{brief.title}</span>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-0.5">{brief.category}</p>
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-600">{brief.client}</td>
+                    <td className="px-4 py-4 text-sm text-gray-500 tabular-nums">
+                      {new Date(brief.submittedDate).toLocaleDateString('en-ZA', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '/')}
+                    </td>
+                    <td className="px-4 py-4">
+                      <FlowBadge flow={flow} />
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-500">
+                      {brief.status === 'In Review' ? brief.submittedBy : brief.status === 'Approved' ? 'System' : '–'}
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-400">–</td>
+                    <td className="px-6 py-4 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <button className="px-4 py-1.5 rounded-full border border-tk-green text-tk-green text-xs font-semibold hover:bg-tk-green hover:text-tk-navy transition-colors">
+                          View
+                        </button>
+                        {flow !== 'RESOLVED' && (
+                          <button className="px-4 py-1.5 rounded-full bg-tk-blue text-white text-xs font-semibold hover:bg-tk-blue2 transition-colors">
+                            Next Steps
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
         </div>
 
-        {filtered.length === 0 && (
-          <div className="card flex flex-col items-center justify-center py-16 text-center">
-            <FileText size={32} className="text-tk-grey/30 mb-3" />
-            <p className="text-sm text-tk-grey/50">No briefs match your filters</p>
-          </div>
-        )}
       </div>
     </div>
   )

@@ -212,17 +212,7 @@ export function BriefDetailPage() {
   return (
     <div className="flex flex-col gap-0 animate-fade-in">
 
-      <div className="px-6 pt-6">
-        <div className="hero-header">
-          <div className="hero-breadcrumb">D2 · Define · TLK-2026-0042</div>
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <div className="hero-title">DEFINE</div>
-            <div className="hero-subtitle">
-              Samsung Galaxy S26 Ultra Launch · <span className="accent">Platinum Tier</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Page header removed — clean layout */}
 
       <div className="p-6 flex flex-col gap-6">
 
