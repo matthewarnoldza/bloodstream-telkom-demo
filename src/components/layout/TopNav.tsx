@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom'
-import { Settings } from 'lucide-react'
 
 const navItems = [
   { to: '/dashboard',    label: 'Dashboard' },
@@ -56,19 +55,8 @@ export function TopNav() {
           ))}
         </nav>
 
-        {/* Right side — Settings + Telkom logo */}
+        {/* Right side — Telkom logo */}
         <div className="flex items-center gap-3 shrink-0">
-          <NavLink
-            to="/settings"
-            className={({ isActive }) =>
-              `p-2 rounded-lg transition-colors ${isActive ? 'bg-[#0099FF] text-white' : 'text-gray-500 hover:bg-gray-100'}`
-            }
-            title="Settings"
-          >
-            <Settings size={16} />
-          </NavLink>
-
-          {/* Telkom logo — larger, no "Demo" text */}
           <img
             src="/telkom-logo.svg"
             alt="Telkom"
