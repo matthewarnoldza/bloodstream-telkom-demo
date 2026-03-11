@@ -30,20 +30,12 @@ export function DashboardPage() {
       {/* ── HERO HEADER (contained, theme-1 style) ──────────────────────── */}
       <div className="px-6 pt-6">
         <div className="hero-header">
+          <div className="hero-breadcrumb">D3 · Develop</div>
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <div style={{
-                fontSize: 'clamp(22px, 3vw, 32px)',
-                fontWeight: 800,
-                letterSpacing: '-0.5px',
-                lineHeight: 1.1,
-                color: '#ffffff',
-                marginBottom: 8,
-              }}>
-                Campaign Intelligence Dashboard
-              </div>
+              <div className="hero-title">DEVELOP</div>
               <div className="hero-subtitle">
-                <span className="accent">Possible Begins Here</span> · Telkom Campaign Intelligence
+                Campaign development dashboard · <span className="accent">Telkom Campaign Intelligence</span>
               </div>
             </div>
             {/* Date badge */}

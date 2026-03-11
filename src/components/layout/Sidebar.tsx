@@ -1,23 +1,12 @@
 import { NavLink } from 'react-router-dom'
-import {
-  LayoutDashboard,
-  FileText,
-  RefreshCcw,
-  ShieldCheck,
-  GitBranch,
-  Users,
-  FolderOpen,
-  Settings,
-} from 'lucide-react'
+import { Clock } from 'lucide-react'
 
-const navItems = [
-  { to: '/dashboard',    label: 'Dashboard',       icon: LayoutDashboard },
-  { to: '/briefs',       label: 'Brief Intake',    icon: FileText },
-  { to: '/circulation',  label: 'Circulation',     icon: RefreshCcw },
-  { to: '/qa-gates',     label: 'QA Gates',        icon: ShieldCheck },
-  { to: '/versions',     label: 'Version History', icon: GitBranch },
-  { to: '/resources',    label: 'Resources',       icon: Users },
-  { to: '/files',        label: 'Files',           icon: FolderOpen },
+const dItems = [
+  { to: '/discover', label: 'Discover', d: 1 },
+  { to: '/define',   label: 'Define',   d: 2 },
+  { to: '/develop',  label: 'Develop',  d: 3 },
+  { to: '/deliver',  label: 'Deliver',  d: 4 },
+  { to: '/diagnose', label: 'Diagnose', d: 5 },
 ]
 
 // VML logo mark as inline SVG
@@ -64,11 +53,11 @@ export function Sidebar() {
         <p className="text-white/40 text-[10px] uppercase tracking-widest pl-12">Campaign Intelligence</p>
       </div>
 
-      {/* Navigation */}
+      {/* 5D Navigation */}
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
-        <p className="text-white/30 text-[9px] uppercase tracking-widest px-3 mb-2 font-semibold">Navigation</p>
-        <ul className="flex flex-col gap-0.5">
-          {navItems.map(({ to, label, icon: Icon }) => (
+        <p className="text-white/30 text-[9px] uppercase tracking-widest px-3 mb-3 font-semibold">5D Framework</p>
+        <ul className="flex flex-col gap-1">
+          {dItems.map(({ to, label, d }) => (
             <li key={to}>
               <NavLink
                 to={to}
@@ -82,10 +71,15 @@ export function Sidebar() {
               >
                 {({ isActive }) => (
                   <>
-                    <Icon
-                      size={16}
-                      className={`shrink-0 transition-colors ${isActive ? 'text-tk-green' : 'text-white/40 group-hover:text-white/70'}`}
-                    />
+                    <div
+                      className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
+                        isActive
+                          ? 'bg-[#0099FF] text-white'
+                          : 'bg-white/10 text-white/50 group-hover:bg-white/15 group-hover:text-white/70'
+                      }`}
+                    >
+                      D{d}
+                    </div>
                     <span>{label}</span>
                   </>
                 )}
@@ -96,11 +90,24 @@ export function Sidebar() {
 
         <div className="mt-4 pt-4 border-t border-white/10">
           <NavLink
-            to="/settings"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/40 hover:text-white/70 hover:bg-white/8 transition-all"
+            to="/history"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 group ${
+                isActive
+                  ? 'bg-tk-blue2/20 text-white border-l-2 border-tk-green -ml-[2px] pl-[14px]'
+                  : 'text-white/60 hover:text-white hover:bg-white/8'
+              }`
+            }
           >
-            <Settings size={16} />
-            <span>Settings</span>
+            {({ isActive }) => (
+              <>
+                <Clock
+                  size={16}
+                  className={`shrink-0 transition-colors ${isActive ? 'text-tk-green' : 'text-white/40 group-hover:text-white/70'}`}
+                />
+                <span>History</span>
+              </>
+            )}
           </NavLink>
         </div>
       </nav>

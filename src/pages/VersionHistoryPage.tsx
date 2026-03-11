@@ -58,9 +58,9 @@ export function VersionHistoryPage() {
       {/* ── Page Header ──────────────────────────────────────────────── */}
       <div className="px-6 pt-6">
         <div className="hero-header">
-          <div className="hero-breadcrumb">Version Control · March Broadsheet</div>
+          <div className="hero-breadcrumb">History · March Broadsheet</div>
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <div className="hero-title">VERSION HISTORY</div>
+            <div className="hero-title">HISTORY</div>
             <div className="hero-subtitle">
               TLK-2026-0036 · <span className="accent">9 versions · 4 weeks</span>
             </div>

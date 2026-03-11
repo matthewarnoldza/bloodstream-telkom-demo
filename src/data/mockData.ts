@@ -442,6 +442,170 @@ export const boxFiles: BoxFile[] = [
   { id: 'f12', name: 'S26_AllAssets_v4.zip',            type: 'zip',  size: '380.0 MB','version': 'v4',status: 'Pending Review', modified: '2026-03-09 11:30', modifiedBy: 'Tshepo Mokoena', path: ['Telkom', 'Campaign Files', 'Samsung S26 Ultra'] },
 ]
 
+// ─── DISCOVER BRIEFS ─────────────────────────
+export type BriefStatus = 'New' | 'In Review' | 'Approved' | 'Returned'
+export type BriefPriority = 'High' | 'Medium' | 'Low'
+
+export interface DiscoverBrief {
+  id: string
+  title: string
+  client: string
+  description: string
+  tier: Tier
+  status: BriefStatus
+  submittedDate: string
+  submittedBy: string
+  category: string
+  priority: BriefPriority
+}
+
+export const discoverBriefs: DiscoverBrief[] = [
+  {
+    id: 'TLK-2026-0042',
+    title: 'Samsung Galaxy S26 Ultra Launch',
+    client: 'Samsung / Telkom Mobile',
+    description: 'Full-funnel launch campaign for Samsung S26 Ultra across OOH, social, digital & retail channels within the Telkom ecosystem.',
+    tier: 'Platinum',
+    status: 'In Review',
+    submittedDate: '2026-03-01',
+    submittedBy: 'Lerato Dlamini',
+    category: 'Multi-Channel',
+    priority: 'High',
+  },
+  {
+    id: 'TLK-2026-0043',
+    title: 'FreeMe Unlimited Summer Push',
+    client: 'Telkom Mobile',
+    description: 'Summer promotional campaign for FreeMe Unlimited data bundles targeting youth and young professionals.',
+    tier: 'Platinum',
+    status: 'Approved',
+    submittedDate: '2026-02-28',
+    submittedBy: 'Amahle Zulu',
+    category: 'Digital',
+    priority: 'High',
+  },
+  {
+    id: 'TLK-2026-0044',
+    title: 'Fibre to Home Q2 Rollout',
+    client: 'Telkom Consumer',
+    description: 'Awareness campaign for new fibre coverage areas in Gauteng and Western Cape, promoting speed tiers and installation offers.',
+    tier: 'Gold',
+    status: 'New',
+    submittedDate: '2026-03-08',
+    submittedBy: 'Sipho Nkosi',
+    category: 'Print & Digital',
+    priority: 'Medium',
+  },
+  {
+    id: 'TLK-2026-0045',
+    title: 'LTE Home Connect Autumn',
+    client: 'Telkom Consumer',
+    description: 'LTE fixed wireless broadband campaign for areas without fibre coverage. Focus on affordability and ease of setup.',
+    tier: 'Gold',
+    status: 'In Review',
+    submittedDate: '2026-03-05',
+    submittedBy: 'Tshepo Mokoena',
+    category: 'Digital',
+    priority: 'Medium',
+  },
+  {
+    id: 'TLK-2026-0046',
+    title: 'OpenServe B2B Enterprise',
+    client: 'OpenServe',
+    description: 'B2B thought leadership and demand generation for OpenServe enterprise connectivity solutions targeting CIOs and IT decision-makers.',
+    tier: 'Platinum',
+    status: 'New',
+    submittedDate: '2026-03-09',
+    submittedBy: 'Kyle Hendricks',
+    category: 'Digital & Events',
+    priority: 'High',
+  },
+  {
+    id: 'TLK-2026-0047',
+    title: 'Youth Connect Festival Sponsorship',
+    client: 'Telkom Mobile',
+    description: 'Brand activation and social campaign around Youth Connect Festival sponsorship. Includes live content, influencer partnerships, and on-ground activations.',
+    tier: 'Gold',
+    status: 'Approved',
+    submittedDate: '2026-02-25',
+    submittedBy: 'Amahle Zulu',
+    category: 'Social & Events',
+    priority: 'Medium',
+  },
+  {
+    id: 'TLK-2026-0048',
+    title: 'BCX Cloud Migration Campaign',
+    client: 'BCX',
+    description: 'Enterprise cloud migration awareness campaign targeting mid-to-large businesses currently on legacy infrastructure.',
+    tier: 'Silver',
+    status: 'New',
+    submittedDate: '2026-03-10',
+    submittedBy: 'Ruan Jacobs',
+    category: 'Digital',
+    priority: 'Low',
+  },
+  {
+    id: 'TLK-2026-0049',
+    title: 'SME Starter Pack Spring',
+    client: 'Telkom Business',
+    description: 'Bundled connectivity offer for small businesses: voice, data, and LTE backup in one simple package.',
+    tier: 'Silver',
+    status: 'Returned',
+    submittedDate: '2026-03-02',
+    submittedBy: 'Sipho Nkosi',
+    category: 'Print & Digital',
+    priority: 'Medium',
+  },
+  {
+    id: 'TLK-2026-0050',
+    title: 'Executive Lifestyle Bundle',
+    client: 'Telkom Business',
+    description: 'Premium connectivity bundle targeting C-suite executives. Includes dedicated fibre, mobile, and concierge support.',
+    tier: 'Bronze',
+    status: 'In Review',
+    submittedDate: '2026-03-06',
+    submittedBy: 'Lerato Dlamini',
+    category: 'Digital',
+    priority: 'Low',
+  },
+  {
+    id: 'TLK-2026-0051',
+    title: 'March Monthly Broadsheet',
+    client: 'Telkom Consumer',
+    description: 'Monthly promotional broadsheet for in-store and direct mail distribution. Features current deals across all product lines.',
+    tier: 'Gold',
+    status: 'Approved',
+    submittedDate: '2026-02-20',
+    submittedBy: 'Tshepo Mokoena',
+    category: 'Print',
+    priority: 'High',
+  },
+  {
+    id: 'TLK-2026-0052',
+    title: 'Seasonal Data Deals Winter',
+    client: 'Telkom Mobile',
+    description: 'Limited-time data deal promotions for the winter season. Social-first campaign with influencer amplification.',
+    tier: 'Bronze',
+    status: 'New',
+    submittedDate: '2026-03-11',
+    submittedBy: 'Amahle Zulu',
+    category: 'Social',
+    priority: 'Medium',
+  },
+  {
+    id: 'TLK-2026-0053',
+    title: 'Telkom ONE Streaming Launch',
+    client: 'Telkom Consumer',
+    description: 'Launch campaign for Telkom ONE streaming service bundled with fibre packages. Cross-platform awareness and sign-up drive.',
+    tier: 'Platinum',
+    status: 'New',
+    submittedDate: '2026-03-11',
+    submittedBy: 'Nomsa Vilakazi',
+    category: 'Multi-Channel',
+    priority: 'High',
+  },
+]
+
 export const folderTree = [
   {
     name: 'Telkom',
